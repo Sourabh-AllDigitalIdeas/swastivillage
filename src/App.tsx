@@ -32,10 +32,10 @@ const AppContent = () => {
           <Routes>
             <Route path="/" element={<Index onEnquiry={enquiry.open} />} />
             <Route path="/about" element={<About />} />
-            {/* <Route path="/services" element={<Services />} />
-            <Route path="/services/:slug" element={<ServiceDetail />} />
-            <Route path="/facilities" element={<Facilities />} /> */}
-            {/* <Route path="/gallery" element={<Gallery />} /> */}
+            <Route path="/services" element={<Services />} />
+            {/*  <Route path="/services/:slug" element={<ServiceDetail />} />*/}
+            <Route path="/facilities" element={<Facilities />} />
+            <Route path="/gallery" element={<Gallery />} />
             <Route path="/testimonials" element={<Testimonials />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
