@@ -3,6 +3,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import SectionHeading from "@/components/SectionHeading";
 import PageTransition from "@/components/PageTransition";
 import heroBg from "@/assets/hero-bg.jpg";
+import facilityBg from "/images/47.jpeg";
 
 const About = () => (
   <PageTransition>
@@ -51,7 +52,7 @@ const About = () => (
     <section className="section-padding bg-secondary">
       <div className="container-custom grid md:grid-cols-2 gap-12 items-center">
         <AnimatedSection>
-          <img src={heroBg} alt="Our Facility" className="rounded-2xl shadow-lg w-full h-80 object-cover" />
+          <img src={facilityBg} alt="Our Facility" className="rounded-2xl shadow-lg w-full h-80 object-cover" />
         </AnimatedSection>
         <AnimatedSection delay={0.2}>
           <SectionHeading title="Our Facility" centered={false} />

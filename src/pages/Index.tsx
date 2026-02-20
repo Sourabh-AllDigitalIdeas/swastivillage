@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import heroBg from "@/assets/hero-bg.jpg";
+import aboutBg from "/images/20.jpeg";
 import AnimatedSection from "@/components/AnimatedSection";
 import SectionHeading from "@/components/SectionHeading";
 import PageTransition from "@/components/PageTransition";
@@ -140,7 +141,7 @@ const Index = ({ onEnquiry }: IndexProps) => {
       <section className="section-padding gradient-section">
         <div className="container-custom grid md:grid-cols-2 gap-12 items-center">
           <AnimatedSection>
-            <img src={heroBg} alt="About Swasti" className="rounded-2xl shadow-lg w-full h-80 object-cover" />
+            <img src={aboutBg} alt="About Swasti" className="rounded-2xl shadow-lg w-full h-80 object-cover" />
           </AnimatedSection>
           <AnimatedSection delay={0.2}>
             <p className="text-primary font-semibold text-sm uppercase tracking-wider mb-2">About Us</p>

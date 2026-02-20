@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone, ChevronDown } from "lucide-react";
 import { serviceData } from "@/lib/serviceData";
+import logo from "@/assets/logo.jpg";
 
 const navLinks = [
   { to: "/", label: "Home" },
@@ -60,20 +61,27 @@ const Navbar = ({ onEnquiry }: NavbarProps) => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        scrolled ? "bg-card/95 backdrop-blur-md shadow-lg border-b border-border" : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${scrolled ? "bg-card/95 backdrop-blur-md shadow-lg border-b border-border" : "bg-transparent"
+        }`}
     >
       <div className="container-custom flex items-center justify-between h-16 md:h-20">
-        <Link to="/" className="flex items-center gap-2">
-          <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
-            <span className="text-primary-foreground font-display font-bold text-lg">S</span>
-          </div>
+        <Link to="/" className="flex items-center gap-3">
+          <img
+            src={logo}
+            alt="Swasti Old Age Home Logo"
+            className="h-14 w-auto object-contain"
+          />
           <div>
-            <span className={`font-display font-bold text-lg leading-tight block ${scrolled ? "text-foreground" : "text-primary-foreground"}`}>
+            <span
+              className={`font-display font-bold text-2xl leading-tight block ${scrolled ? "text-foreground" : "text-primary-foreground"
+                }`}
+            >
               Swasti
             </span>
-            <span className={`text-[10px] leading-tight block ${scrolled ? "text-muted-foreground" : "text-primary-foreground/80"}`}>
+            <span
+              className={`text-[14px] leading-tight block ${scrolled ? "text-muted-foreground" : "text-primary-foreground/80"
+                }`}
+            >
               Old Age Home
             </span>
           </div>
@@ -86,13 +94,12 @@ const Navbar = ({ onEnquiry }: NavbarProps) => {
               <div key={link.to} className="relative" ref={dropdownRef}>
                 <button
                   onClick={() => setServicesOpen(!servicesOpen)}
-                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1 ${
-                    location.pathname.startsWith("/services")
+                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1 ${location.pathname.startsWith("/services")
                       ? "bg-primary text-primary-foreground"
                       : scrolled
-                      ? "text-foreground hover:bg-secondary"
-                      : "text-primary-foreground/90 hover:text-primary-foreground hover:bg-primary-foreground/10"
-                  }`}
+                        ? "text-foreground hover:bg-secondary"
+                        : "text-primary-foreground/90 hover:text-primary-foreground hover:bg-primary-foreground/10"
+                    }`}
                 >
                   {link.label}
                   <ChevronDown size={14} className={`transition-transform ${servicesOpen ? "rotate-180" : ""}`} />
@@ -116,11 +123,10 @@ const Navbar = ({ onEnquiry }: NavbarProps) => {
                         <Link
                           key={child.to}
                           to={child.to}
-                          className={`block px-4 py-3 text-sm transition-colors hover:bg-secondary ${
-                            location.pathname === child.to
+                          className={`block px-4 py-3 text-sm transition-colors hover:bg-secondary ${location.pathname === child.to
                               ? "text-primary font-semibold bg-primary/5"
                               : "text-foreground"
-                          }`}
+                            }`}
                         >
                           <span className="mr-2">{child.emoji}</span>
                           {child.label}
@@ -134,13 +140,12 @@ const Navbar = ({ onEnquiry }: NavbarProps) => {
               <Link
                 key={link.to}
                 to={link.to}
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  location.pathname === link.to
+                className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${location.pathname === link.to
                     ? "bg-primary text-primary-foreground"
                     : scrolled
-                    ? "text-foreground hover:bg-secondary"
-                    : "text-primary-foreground/90 hover:text-primary-foreground hover:bg-primary-foreground/10"
-                }`}
+                      ? "text-foreground hover:bg-secondary"
+                      : "text-primary-foreground/90 hover:text-primary-foreground hover:bg-primary-foreground/10"
+                  }`}
               >
                 {link.label}
               </Link>
@@ -178,11 +183,10 @@ const Navbar = ({ onEnquiry }: NavbarProps) => {
                   <div key={link.to}>
                     <button
                       onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                      className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-colors ${
-                        location.pathname.startsWith("/services")
+                      className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-colors ${location.pathname.startsWith("/services")
                           ? "bg-primary text-primary-foreground"
                           : "text-foreground hover:bg-secondary"
-                      }`}
+                        }`}
                     >
                       {link.label}
                       <ChevronDown size={16} className={`transition-transform ${mobileServicesOpen ? "rotate-180" : ""}`} />
@@ -205,9 +209,8 @@ const Navbar = ({ onEnquiry }: NavbarProps) => {
                             <Link
                               key={child.to}
                               to={child.to}
-                              className={`block pl-8 pr-4 py-2 text-sm transition-colors ${
-                                location.pathname === child.to ? "text-primary font-semibold" : "text-muted-foreground hover:text-primary"
-                              }`}
+                              className={`block pl-8 pr-4 py-2 text-sm transition-colors ${location.pathname === child.to ? "text-primary font-semibold" : "text-muted-foreground hover:text-primary"
+                                }`}
                             >
                               <span className="mr-2">{child.emoji}</span>
                               {child.label}
@@ -221,11 +224,10 @@ const Navbar = ({ onEnquiry }: NavbarProps) => {
                   <Link
                     key={link.to}
                     to={link.to}
-                    className={`block px-4 py-3 rounded-xl text-sm font-medium transition-colors ${
-                      location.pathname === link.to
+                    className={`block px-4 py-3 rounded-xl text-sm font-medium transition-colors ${location.pathname === link.to
                         ? "bg-primary text-primary-foreground"
                         : "text-foreground hover:bg-secondary"
-                    }`}
+                      }`}
                   >
                     {link.label}
                   </Link>
