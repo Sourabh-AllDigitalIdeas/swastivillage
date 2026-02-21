@@ -1,25 +1,75 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { MapPin, Phone, Mail, Globe, Send, QrCode } from "lucide-react";
+import { MapPin, Phone, Mail, Globe, Send, QrCode, CheckCircle } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
 import SectionHeading from "@/components/SectionHeading";
 import PageTransition from "@/components/PageTransition";
 import heroBg from "@/assets/hero-bg.jpg";
+import { api_config } from "@/config/config";
 
 const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", phone: "", subject: "", message: "" });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setForm({ name: "", email: "", phone: "", subject: "", message: "" });
-    }, 3000);
+    setIsSubmitting(true);
+
+    try {
+      const submitData = {
+        fullName: form.name,
+        email: form.email,
+        mobileNumber: form.phone,
+        lookingFor: form.subject || "General Enquiry - Swasti Old Age Home",
+        message: `
+New Contact Form Submission<br><br>
+
+Full Name: ${form.name}<br>
+Phone: ${form.phone}<br>
+Email: ${form.email}<br>
+Subject: ${form.subject || "Not provided"}<br>
+Message: ${form.message}<br>
+
+<br>
+Submitted via: Swasti Old Age Home Contact Page<br>
+Date: ${new Date().toLocaleDateString()}<br>
+Time: ${new Date().toLocaleTimeString()}
+      `.trim(),
+        countryCode: '+91',
+        clientId: '68cbc1eb6cba3c047986c521',
+      };
+
+      console.log("Submitting contact form:", submitData);
+
+      const response = await fetch(`${api_config.api_url}/contact-forms`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(submitData),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setSubmitted(true);
+        setTimeout(() => {
+          setSubmitted(false);
+          setForm({ name: "", email: "", phone: "", subject: "", message: "" });
+        }, 3000);
+      } else {
+        throw new Error(result.message || "Failed to submit form");
+      }
+    } catch (error) {
+      console.error("Contact form error:", error);
+      alert(`Error submitting message: ${error.message}`);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  const inputClass = "w-full px-4 py-3 rounded-xl bg-secondary border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm";
+  const inputClass = "w-full px-4 py-3 rounded-xl bg-secondary border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm disabled:opacity-50";
 
   return (
     <PageTransition>
@@ -96,9 +146,13 @@ const Contact = () => {
               <div className="card-elevated p-8">
                 <h3 className="font-display text-2xl font-bold text-foreground mb-6">Send us a Message</h3>
                 {submitted ? (
-                  <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="text-center py-12">
+                  <motion.div 
+                    initial={{ scale: 0.9 }} 
+                    animate={{ scale: 1 }} 
+                    className="text-center py-12"
+                  >
                     <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Send className="text-primary" size={28} />
+                      <CheckCircle className="text-primary" size={28} />
                     </div>
                     <p className="font-display text-xl font-semibold text-foreground">Message Sent!</p>
                     <p className="text-muted-foreground text-sm mt-1">We'll respond within 24 hours.</p>
@@ -106,21 +160,70 @@ const Contact = () => {
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="grid sm:grid-cols-2 gap-4">
-                      <input type="text" required placeholder="Your Name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className={inputClass} />
-                      <input type="email" required placeholder="Email Address" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className={inputClass} />
+                      <input 
+                        type="text" 
+                        required 
+                        placeholder="Your Name" 
+                        value={form.name} 
+                        onChange={(e) => setForm({ ...form, name: e.target.value })} 
+                        className={inputClass}
+                        disabled={isSubmitting}
+                      />
+                      <input 
+                        type="email" 
+                        required 
+                        placeholder="Email Address" 
+                        value={form.email} 
+                        onChange={(e) => setForm({ ...form, email: e.target.value })} 
+                        className={inputClass}
+                        disabled={isSubmitting}
+                      />
                     </div>
                     <div className="grid sm:grid-cols-2 gap-4">
-                      <input type="tel" required placeholder="Phone Number" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className={inputClass} />
-                      <input type="text" placeholder="Subject" value={form.subject} onChange={(e) => setForm({ ...form, subject: e.target.value })} className={inputClass} />
+                      <input 
+                        type="tel" 
+                        required 
+                        placeholder="Phone Number" 
+                        value={form.phone} 
+                        onChange={(e) => setForm({ ...form, phone: e.target.value })} 
+                        className={inputClass}
+                        disabled={isSubmitting}
+                      />
+                      <input 
+                        type="text" 
+                        placeholder="Subject" 
+                        value={form.subject} 
+                        onChange={(e) => setForm({ ...form, subject: e.target.value })} 
+                        className={inputClass}
+                        disabled={isSubmitting}
+                      />
                     </div>
-                    <textarea required placeholder="Your Message" rows={5} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className={`${inputClass} resize-none`} />
+                    <textarea 
+                      required 
+                      placeholder="Your Message" 
+                      rows={5} 
+                      value={form.message} 
+                      onChange={(e) => setForm({ ...form, message: e.target.value })} 
+                      className={`${inputClass} resize-none`}
+                      disabled={isSubmitting}
+                    />
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       type="submit"
-                      className="w-full py-3 bg-primary text-primary-foreground rounded-xl font-semibold text-sm hover:bg-accent transition-colors flex items-center justify-center gap-2"
+                      disabled={isSubmitting}
+                      className="w-full py-3 bg-primary text-primary-foreground rounded-xl font-semibold text-sm hover:bg-accent transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      <Send size={16} /> Send Message
+                      {isSubmitting ? (
+                        <>
+                          <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          <Send size={16} /> Send Message
+                        </>
+                      )}
                     </motion.button>
                   </form>
                 )}
