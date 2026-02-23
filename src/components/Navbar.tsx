@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone, ChevronDown } from "lucide-react";
 import { serviceData } from "@/lib/serviceData";
-import logo from "@/assets/logo.jpg";
+import logo from "@/assets/logo.png";
 
 const navLinks = [
   { to: "/", label: "Home" },
@@ -65,27 +65,32 @@ const Navbar = ({ onEnquiry }: NavbarProps) => {
   fixed top-0 left-0 right-0 z-50
   transition-all duration-300 backdrop-saturate-150
   ${scrolled
-    ? "bg-white/80 backdrop-blur-xl shadow-lg border-b border-white/20"
-    : "bg-black/30 backdrop-blur-md"
-  }
+          ? "bg-white/80 backdrop-blur-xl shadow-lg border-b border-white/20"
+          : "bg-black/30 backdrop-blur-md"
+        }
 `}
     >
-      <div className="container-custom flex items-center justify-between h-20">
-        <Link to="/" className="flex items-center gap-3">
-          <img
-            src={logo}
-            alt="Swasti Old Age Home Logo"
-            className="h-12 w-auto object-contain drop-shadow-md"
-          />
-          <div>
+      <div className="container-custom flex items-center justify-between">
+        <Link to="/" className="flex items-center gap-2">
+          {/* Logo container with fixed height and flex centering */}
+          <div className="flex items-center justify-center h-20 md:h-24 pt-4">
+            <img
+              src={logo}
+              alt="Swasti Old Age Home Logo"
+              className="h-full w-auto max-h-full object-contain"
+            />
+          </div>
+
+          {/* Text container with same height and flex centering */}
+          <div className="flex flex-col justify-center h-14 md:h-20">
             <span
-              className={`font-display font-bold text-2xl leading-tight block ${scrolled  ? "text-foreground" : "text-white drop-shadow-md"
+              className={`font-display font-bold text-xl md:text-2xl leading-tight ${scrolled ? "text-foreground" : "text-white"
                 }`}
             >
               Swasti
             </span>
             <span
-              className={`text-[14px] leading-tight block ${scrolled ? "text-muted-foreground" : "text-primary-foreground/80"
+              className={`text-xs md:text-sm leading-tight ${scrolled ? "text-muted-foreground" : "text-white/80"
                 }`}
             >
               Old Age Home
@@ -168,7 +173,7 @@ const Navbar = ({ onEnquiry }: NavbarProps) => {
         {/* Mobile Toggle */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className={`lg:hidden p-2 rounded-lg ${scrolled  ? "text-foreground" : "text-white drop-shadow-md"}`}
+          className={`lg:hidden p-2 rounded-lg ${scrolled ? "text-foreground" : "text-white drop-shadow-md"}`}
         >
           {mobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
