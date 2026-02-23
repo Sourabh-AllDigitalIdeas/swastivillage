@@ -58,10 +58,10 @@ const Footer = () => (
               <Mail size={16} className="shrink-0" />
               <span>swastioldage@gmail.com</span>
             </div>
-            <div className="flex items-center gap-3 opacity-70">
+            {/* <div className="flex items-center gap-3 opacity-70">
               <Globe size={16} className="shrink-0" />
               <span>swastivillage.com</span>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

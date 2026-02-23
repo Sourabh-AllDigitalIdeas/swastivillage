@@ -6,7 +6,8 @@ import {
   BookOpen, Music, ChevronDown,
 } from "lucide-react";
 import { useState } from "react";
-import heroBg from "@/assets/hero-bg.jpg";
+import heroBg from "@/assets/heroBg.jpeg";
+import mobileHeroBg from "@/assets/mobileHeroBg.jpeg";
 import aboutBg from "/images/20.jpeg";
 import AnimatedSection from "@/components/AnimatedSection";
 import SectionHeading from "@/components/SectionHeading";
@@ -73,58 +74,49 @@ const Index = ({ onEnquiry }: IndexProps) => {
   return (
     <PageTransition>
       {/* Hero */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <img
-          src={heroBg}
-          alt="Swasti Old Age Home"
-          className="absolute inset-0 w-full h-full object-cover scale-105 brightness-90"
-        />
+      <section className="relative min-h-screen flex flex-col overflow-hidden">
 
-        <div className="absolute inset-0 gradient-primary" />
-        <div className="relative z-10 container-custom text-center text-primary-foreground py-32">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-sm md:text-base font-medium tracking-widest uppercase mb-4 opacity-90"
-          >
-            Welcome to Swasti Old Age Home
-          </motion.p>
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="font-display text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 max-w-4xl mx-auto"
-          >
-            Promoting a Life of Wellness and Auspiciousness
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.7 }}
-            className="text-lg md:text-xl max-w-2xl mx-auto mb-10 opacity-90"
-          >
-            A caring sanctuary where your loved ones thrive with dignity, comfort, and compassion.
-          </motion.p>
+        {/* Background Image */}
+        <picture className="absolute inset-0">
+          <source media="(max-width: 768px)" srcSet={mobileHeroBg} />
+          <img
+            src={heroBg}
+            alt="Swasti Old Age Home"
+            className="w-full h-full object-cover scale-105 brightness-90"
+          />
+        </picture>
+
+        {/* Optional Dark Overlay */}
+        <div className="absolute inset-0 bg-black/30" />
+
+        {/* Content Wrapper */}
+        <div className="relative z-10 flex flex-col min-h-screen container-custom text-center text-white px-6">
+
+          {/* Spacer to push buttons downward */}
+          <div className="flex-1" />
+
+          {/* Buttons at Bottom */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            transition={{ delay: 0.6 }}
+            className="pb-12 md:pb-20 flex flex-col sm:flex-row gap-4 justify-center"
           >
             <button
               onClick={onEnquiry}
-              className="px-8 py-4 bg-primary-foreground text-primary rounded-xl font-semibold hover:bg-primary-foreground/90 transition-colors text-lg"
+              className="px-8 py-4 bg-white text-primary rounded-xl font-semibold hover:bg-white/90 transition-colors text-lg"
             >
               Book Enquiry
             </button>
+
             <Link
               to="/services"
-              className="px-8 py-4 border-2 border-primary-foreground text-primary-foreground rounded-xl font-semibold hover:bg-primary-foreground/10 transition-colors text-lg"
+              className="px-8 py-4 border-2 border-white text-white rounded-xl font-semibold hover:bg-white/10 transition-colors text-lg"
             >
               View Services
             </Link>
           </motion.div>
+
         </div>
       </section>
 

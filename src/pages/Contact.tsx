@@ -6,6 +6,7 @@ import SectionHeading from "@/components/SectionHeading";
 import PageTransition from "@/components/PageTransition";
 import heroBg from "@/assets/hero-bg.jpg";
 import { api_config } from "@/config/config";
+import QRCode from "react-qr-code";
 
 const Contact = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -90,54 +91,86 @@ Time: ${new Date().toLocaleTimeString()}
             {/* Contact Info */}
             <AnimatedSection>
               <div className="space-y-6">
+
+                {/* Address */}
                 <div className="card-elevated p-6 flex items-start gap-4">
                   <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center shrink-0">
                     <MapPin className="text-primary" size={22} />
                   </div>
                   <div>
                     <h4 className="font-semibold text-foreground mb-1">Address</h4>
-                    <p className="text-muted-foreground text-sm">211 Road, Aminpur Bazar<br />P.O - Sondalia, P.S - Shasan<br />Dist. - North 24 Parganas</p>
+                    <a
+                      href="https://maps.google.com/?q=211 Road, Aminpur Bazar, Sondalia, North 24 Parganas"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground text-sm hover:text-primary transition-colors"
+                    >
+                      211 Road, Aminpur Bazar<br />
+                      P.O - Sondalia, P.S - Shasan<br />
+                      Dist. - North 24 Parganas
+                    </a>
                   </div>
                 </div>
 
+                {/* Phone */}
                 <div className="card-elevated p-6 flex items-start gap-4">
                   <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center shrink-0">
                     <Phone className="text-primary" size={22} />
                   </div>
                   <div>
                     <h4 className="font-semibold text-foreground mb-1">Phone</h4>
-                    <p className="text-muted-foreground text-sm">082829 48945</p>
+                    <a
+                      href="tel:+918282948945"
+                      className="text-muted-foreground text-sm hover:text-primary transition-colors"
+                    >
+                      +91 82829 48945
+                    </a>
                   </div>
                 </div>
 
+                {/* Email */}
                 <div className="card-elevated p-6 flex items-start gap-4">
                   <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center shrink-0">
                     <Mail className="text-primary" size={22} />
                   </div>
                   <div>
                     <h4 className="font-semibold text-foreground mb-1">Email</h4>
-                    <p className="text-muted-foreground text-sm">swastioldage@gmail.com</p>
-                  </div>
-                </div>
-
-                <div className="card-elevated p-6 flex items-start gap-4">
-                  <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center shrink-0">
-                    <Globe className="text-primary" size={22} />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-foreground mb-1">Website</h4>
-                    <p className="text-muted-foreground text-sm">swastivillage.com</p>
+                    <a
+                      href="mailto:swastioldage@gmail.com"
+                      className="text-muted-foreground text-sm hover:text-primary transition-colors"
+                    >
+                      swastioldage@gmail.com
+                    </a>
                   </div>
                 </div>
 
                 {/* QR Code */}
-                <div className="card-elevated p-6 text-center">
-                  <QrCode className="text-primary mx-auto mb-3" size={32} />
-                  <div className="w-32 h-32 bg-secondary rounded-xl mx-auto flex items-center justify-center border border-border">
-                    <img src="/placeholder.svg" alt="QR Code" className="w-24 h-24" />
-                  </div>
-                  <p className="text-muted-foreground text-xs mt-3">Scan to visit our website</p>
-                </div>
+                {/* QR Code */}
+<div className="card-elevated p-6 text-center">
+  <QrCode className="text-primary mx-auto mb-3" size={32} />
+
+  <div className="bg-white p-4 rounded-xl inline-block">
+    <QRCode
+      value="https://share.google/Ax5Hyl7ZuaaKtgeqg"
+      size={120}
+    />
+  </div>
+
+  <p className="text-muted-foreground text-xs mt-3">
+    Scan to visit our website
+  </p>
+
+  {/* Direct Website Link */}
+  {/* <a
+    href="https://share.google/Ax5Hyl7ZuaaKtgeqg"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-primary text-sm underline mt-2 inline-block"
+  >
+    Visit Website
+  </a> */}
+</div>
+
               </div>
             </AnimatedSection>
 
@@ -146,9 +179,9 @@ Time: ${new Date().toLocaleTimeString()}
               <div className="card-elevated p-8">
                 <h3 className="font-display text-2xl font-bold text-foreground mb-6">Send us a Message</h3>
                 {submitted ? (
-                  <motion.div 
-                    initial={{ scale: 0.9 }} 
-                    animate={{ scale: 1 }} 
+                  <motion.div
+                    initial={{ scale: 0.9 }}
+                    animate={{ scale: 1 }}
                     className="text-center py-12"
                   >
                     <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -160,50 +193,50 @@ Time: ${new Date().toLocaleTimeString()}
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="grid sm:grid-cols-2 gap-4">
-                      <input 
-                        type="text" 
-                        required 
-                        placeholder="Your Name" 
-                        value={form.name} 
-                        onChange={(e) => setForm({ ...form, name: e.target.value })} 
+                      <input
+                        type="text"
+                        required
+                        placeholder="Your Name"
+                        value={form.name}
+                        onChange={(e) => setForm({ ...form, name: e.target.value })}
                         className={inputClass}
                         disabled={isSubmitting}
                       />
-                      <input 
-                        type="email" 
-                        required 
-                        placeholder="Email Address" 
-                        value={form.email} 
-                        onChange={(e) => setForm({ ...form, email: e.target.value })} 
+                      <input
+                        type="email"
+                        required
+                        placeholder="Email Address"
+                        value={form.email}
+                        onChange={(e) => setForm({ ...form, email: e.target.value })}
                         className={inputClass}
                         disabled={isSubmitting}
                       />
                     </div>
                     <div className="grid sm:grid-cols-2 gap-4">
-                      <input 
-                        type="tel" 
-                        required 
-                        placeholder="Phone Number" 
-                        value={form.phone} 
-                        onChange={(e) => setForm({ ...form, phone: e.target.value })} 
+                      <input
+                        type="tel"
+                        required
+                        placeholder="Phone Number"
+                        value={form.phone}
+                        onChange={(e) => setForm({ ...form, phone: e.target.value })}
                         className={inputClass}
                         disabled={isSubmitting}
                       />
-                      <input 
-                        type="text" 
-                        placeholder="Subject" 
-                        value={form.subject} 
-                        onChange={(e) => setForm({ ...form, subject: e.target.value })} 
+                      <input
+                        type="text"
+                        placeholder="Subject"
+                        value={form.subject}
+                        onChange={(e) => setForm({ ...form, subject: e.target.value })}
                         className={inputClass}
                         disabled={isSubmitting}
                       />
                     </div>
-                    <textarea 
-                      required 
-                      placeholder="Your Message" 
-                      rows={5} 
-                      value={form.message} 
-                      onChange={(e) => setForm({ ...form, message: e.target.value })} 
+                    <textarea
+                      required
+                      placeholder="Your Message"
+                      rows={5}
+                      value={form.message}
+                      onChange={(e) => setForm({ ...form, message: e.target.value })}
                       className={`${inputClass} resize-none`}
                       disabled={isSubmitting}
                     />
