@@ -61,19 +61,25 @@ const Navbar = ({ onEnquiry }: NavbarProps) => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${scrolled ? "bg-card/95 backdrop-blur-md shadow-lg border-b border-border" : "bg-transparent"
-        }`}
+      className={`
+  fixed top-0 left-0 right-0 z-50
+  transition-all duration-300 backdrop-saturate-150
+  ${scrolled
+    ? "bg-white/80 backdrop-blur-xl shadow-lg border-b border-white/20"
+    : "bg-black/30 backdrop-blur-md"
+  }
+`}
     >
-      <div className="container-custom flex items-center justify-between h-16 md:h-20">
+      <div className="container-custom flex items-center justify-between h-20">
         <Link to="/" className="flex items-center gap-3">
           <img
             src={logo}
             alt="Swasti Old Age Home Logo"
-            className="h-14 w-auto object-contain"
+            className="h-12 w-auto object-contain drop-shadow-md"
           />
           <div>
             <span
-              className={`font-display font-bold text-2xl leading-tight block ${scrolled ? "text-foreground" : "text-primary-foreground"
+              className={`font-display font-bold text-2xl leading-tight block ${scrolled  ? "text-foreground" : "text-white drop-shadow-md"
                 }`}
             >
               Swasti
@@ -95,10 +101,10 @@ const Navbar = ({ onEnquiry }: NavbarProps) => {
                 <button
                   onClick={() => setServicesOpen(!servicesOpen)}
                   className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1 ${location.pathname.startsWith("/services")
-                      ? "bg-primary text-primary-foreground"
-                      : scrolled
-                        ? "text-foreground hover:bg-secondary"
-                        : "text-primary-foreground/90 hover:text-primary-foreground hover:bg-primary-foreground/10"
+                    ? "bg-primary text-primary-foreground"
+                    : scrolled
+                      ? "text-foreground hover:bg-secondary"
+                      : "text-primary-foreground/90 hover:text-primary-foreground hover:bg-primary-foreground/10"
                     }`}
                 >
                   {link.label}
@@ -124,8 +130,8 @@ const Navbar = ({ onEnquiry }: NavbarProps) => {
                           key={child.to}
                           to={child.to}
                           className={`block px-4 py-3 text-sm transition-colors hover:bg-secondary ${location.pathname === child.to
-                              ? "text-primary font-semibold bg-primary/5"
-                              : "text-foreground"
+                            ? "text-primary font-semibold bg-primary/5"
+                            : "text-foreground"
                             }`}
                         >
                           <span className="mr-2">{child.emoji}</span>
@@ -141,10 +147,10 @@ const Navbar = ({ onEnquiry }: NavbarProps) => {
                 key={link.to}
                 to={link.to}
                 className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${location.pathname === link.to
-                    ? "bg-primary text-primary-foreground"
-                    : scrolled
-                      ? "text-foreground hover:bg-secondary"
-                      : "text-primary-foreground/90 hover:text-primary-foreground hover:bg-primary-foreground/10"
+                  ? "bg-primary text-primary-foreground"
+                  : scrolled
+                    ? "text-foreground hover:bg-secondary"
+                    : "text-primary-foreground/90 hover:text-primary-foreground hover:bg-primary-foreground/10"
                   }`}
               >
                 {link.label}
@@ -162,7 +168,7 @@ const Navbar = ({ onEnquiry }: NavbarProps) => {
         {/* Mobile Toggle */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className={`lg:hidden p-2 rounded-lg ${scrolled ? "text-foreground" : "text-primary-foreground"}`}
+          className={`lg:hidden p-2 rounded-lg ${scrolled  ? "text-foreground" : "text-white drop-shadow-md"}`}
         >
           {mobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -184,8 +190,8 @@ const Navbar = ({ onEnquiry }: NavbarProps) => {
                     <button
                       onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
                       className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-colors ${location.pathname.startsWith("/services")
-                          ? "bg-primary text-primary-foreground"
-                          : "text-foreground hover:bg-secondary"
+                        ? "bg-primary text-primary-foreground"
+                        : "text-foreground hover:bg-secondary"
                         }`}
                     >
                       {link.label}
@@ -225,8 +231,8 @@ const Navbar = ({ onEnquiry }: NavbarProps) => {
                     key={link.to}
                     to={link.to}
                     className={`block px-4 py-3 rounded-xl text-sm font-medium transition-colors ${location.pathname === link.to
-                        ? "bg-primary text-primary-foreground"
-                        : "text-foreground hover:bg-secondary"
+                      ? "bg-primary text-primary-foreground"
+                      : "text-foreground hover:bg-secondary"
                       }`}
                   >
                     {link.label}
