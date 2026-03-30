@@ -223,7 +223,7 @@ const Index = ({ onEnquiry }: IndexProps) => {
       </section>
 
       {/* Our Team */}
-      <section className="section-padding bg-secondary">
+      {/* <section className="section-padding bg-secondary">
         <div className="container-custom">
           <SectionHeading title="Our Dedicated Team" subtitle="Compassionate professionals committed to the well-being of our residents." />
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -245,7 +245,7 @@ const Index = ({ onEnquiry }: IndexProps) => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Testimonials Preview */}
       <section className="section-padding">
